@@ -2,6 +2,10 @@ package fr.tartopaum.mowitnow.model;
 
 import java.io.Serializable;
 
+/**
+ * Coordonnées : point 2D {@code (x, y)}.
+ * @author Tartopaum
+ */
 public final class Coordinates implements Serializable {
 
     private static final long serialVersionUID = -4047666685223828458L;

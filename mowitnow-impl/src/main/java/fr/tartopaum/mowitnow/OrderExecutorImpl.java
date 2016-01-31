@@ -11,6 +11,7 @@ import fr.tartopaum.mowitnow.model.Situation;
 
 public class OrderExecutorImpl implements OrderExecutor {
 
+    /** Liste des orientations ordonnées dans le sens des aiguilles d'une montre. */
     private static final Orientation[] ORIENTATION_ARRAY_ORDERED = {
             Orientation.NORTH,
             Orientation.EAST,
@@ -53,6 +54,12 @@ public class OrderExecutorImpl implements OrderExecutor {
         return result;
     }
 
+    /**
+     * Exécution de l'ordre d'avancer.
+     * @param situation Situation initiale.
+     * @return Situation finale.
+     * @throws ExecutionException
+     */
     private Situation goForward(Situation situation) throws ExecutionException {
         Coordinates coordinates = situation.getCoordinates();
         Coordinates nextCoordinates;
@@ -77,20 +84,45 @@ public class OrderExecutorImpl implements OrderExecutor {
         return situation.withCoordinates(nextCoordinates);
     }
 
+    /**
+     * Exécution de l'ordre de tourner à gauche.
+     * @param situation Situation initiale.
+     * @return Situation finale.
+     * @throws ExecutionException
+     */
     private Situation turnLeft(Situation situation) throws ExecutionException {
         return turn(situation, ORIENTATION_ARRAY_ORDERED.length - 1);
     }
 
+    /**
+     * Exécution de l'ordre de tourner à droite.
+     * @param situation Situation initiale.
+     * @return Situation finale.
+     * @throws ExecutionException
+     */
     private Situation turnRight(Situation situation) throws ExecutionException {
         return turn(situation, 1);
     }
 
+    /**
+     * Exécution d'un ordre de rotation dans le sens des aiguilles d'une montre.
+     * @param situation Situation initiale.
+     * @param modifier De combien de framents tourner.
+     * @return Situation finale.
+     * @throws ExecutionException
+     */
     private Situation turn(Situation situation, int modifier) throws ExecutionException {
         int currentOrientationIndex = getOrientationIndex(situation.getOrientation());
         int nextOrientationIndex = (currentOrientationIndex + modifier) % ORIENTATION_ARRAY_ORDERED.length;
         return situation.withOrientation(ORIENTATION_ARRAY_ORDERED[nextOrientationIndex]);
     }
 
+    /**
+     * Retourne l'index de l'orientation passée en paramètre dans le tableau contenant les orientations.
+     * @param orientation Orientation dont on veut récupérer l'index.
+     * @return index de l'orientation passée en paramètre dans le tableau contenant les orientations.
+     * @throws ExecutionException
+     */
     private int getOrientationIndex(Orientation orientation) throws ExecutionException {
         for (int i = 0; i < ORIENTATION_ARRAY_ORDERED.length; i++) {
             if (ORIENTATION_ARRAY_ORDERED[i] == orientation) {

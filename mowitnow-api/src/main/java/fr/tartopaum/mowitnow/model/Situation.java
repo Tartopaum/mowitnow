@@ -2,6 +2,11 @@ package fr.tartopaum.mowitnow.model;
 
 import java.io.Serializable;
 
+/**
+ * Situation d'une tondeuse mowitnow.
+ * Il s'agit de la combinaison de coordonnées et d'une orientation.
+ * @author Tartopaum
+ */
 public final class Situation implements Serializable {
 
     private static final long serialVersionUID = -5399998164501991689L;
@@ -9,6 +14,12 @@ public final class Situation implements Serializable {
     private final Coordinates coordinates;
 	private final Orientation orientation;
 
+	/**
+	 * Situation d'une tondeuse mowitnow.
+	 * Il s'agit de la combinaison de coordonnées et d'une orientation.
+	 * @param coordinates Coordonnées.
+	 * @param orientation Orientation.
+	 */
 	public Situation(Coordinates coordinates, Orientation orientation) {
 		super();
 

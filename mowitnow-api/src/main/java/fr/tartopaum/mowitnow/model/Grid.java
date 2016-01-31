@@ -1,5 +1,9 @@
 package fr.tartopaum.mowitnow.model;
 
+/**
+ * Grille 2D, définie par une largeur et une hauteur.
+ * @author Tartopaum
+ */
 public class Grid {
 
     private final int width;
@@ -28,6 +32,12 @@ public class Grid {
         return height;
     }
 
+    /**
+     * Indique si cette grille contient les coordonnées passées en paramètre.
+     * Il s'agit d'un simple calcul vérifiant que les coordonnées sont dans le rectangle défini par cette grille.
+     * @param coordinates Coordonnées dont on veut vérifier l'appartenance à la grille.
+     * @return {@code true} si les coordonnées appartiennent à la grille, {@code false} sinon.
+     */
     public boolean contains(Coordinates coordinates) {
         int x = coordinates.getX();
         int y = coordinates.getY();
@@ -66,6 +76,11 @@ public class Grid {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + width + ", " + "height" + ")";
     }
 
 }

@@ -35,6 +35,13 @@ public class MowItNowParserImpl implements MowItNowParser {
         handler.end();
     }
 
+    /**
+     * Première partie du parsing : parsing de la grille.
+     * @param br Reader.
+     * @param handler Handler.
+     * @throws ParseException
+     * @throws HandlerException
+     */
     protected void parseGrid(BufferedReader br, MowItNowHandler handler) throws ParseException, HandlerException {
         try {
             String line = br.readLine();
@@ -56,6 +63,13 @@ public class MowItNowParserImpl implements MowItNowParser {
         }
     }
 
+    /**
+     * Seconde partie du parsing : parsing des tondeuses.
+     * @param br Reader.
+     * @param handler Handler.
+     * @throws ParseException
+     * @throws HandlerException
+     */
     protected void parseMowers(BufferedReader br, MowItNowHandler handler) throws ParseException, HandlerException {
         try {
             String situationLine;
@@ -92,6 +106,14 @@ public class MowItNowParserImpl implements MowItNowParser {
         }
     }
 
+
+    /**
+     * Parsing de la ligne contenant les ordres.
+     * @param orderLine Ligne contenant les ordres.
+     * @param handler Handler.
+     * @throws ParseException
+     * @throws HandlerException
+     */
     private void parseOrders(String orderLine, MowItNowHandler handler) throws ParseException, HandlerException {
         char[] chars = orderLine.toCharArray();
         for (int i = 0; i < chars.length; i++) {
@@ -102,6 +124,12 @@ public class MowItNowParserImpl implements MowItNowParser {
         }
     }
 
+    /**
+     * Convertions String => Order.
+     * @param orderString Représentation de l'ordre.
+     * @return Order.
+     * @throws ParseException
+     */
     protected Order getOrder(String orderString) throws ParseException {
         switch (orderString) {
         case "A":
@@ -115,6 +143,12 @@ public class MowItNowParserImpl implements MowItNowParser {
         }
     }
 
+    /**
+     * Convertions String => Orientation.
+     * @param orientationString Représentation de l'orientation.
+     * @return Orientation.
+     * @throws ParseException
+     */
     protected Orientation getOrientation(String orientationString) throws ParseException {
         switch (orientationString) {
         case "N":
@@ -130,30 +164,37 @@ public class MowItNowParserImpl implements MowItNowParser {
         }
     }
 
+    /** Retourne le pattern attendu pour la ligne de la grille. */
     protected Pattern getGridPattern() {
         return GRID_PATTERN;
     }
 
+    /** Pour le pattern de la grille : index du groupe contenant la largeur. */
     protected int getGridPatternGroupWidth() {
         return GRID_PATTERN_GROUP_WIDTH;
     }
 
+    /** Pour le pattern de la grille : index du groupe contenant la hauteur. */
     protected int getGridPatternGroupHeight() {
         return GRID_PATTERN_GROUP_HEIGHT;
     }
 
+    /** Retourne le pattern attendu pour la ligne de situation d'une tondeuse. */
     protected Pattern getSituationPattern() {
         return SITUATION_PATTERN;
     }
 
+    /** Pour le pattern de la situation : index du groupe contenant la position X. */
     protected int getSituationPatternGroupX() {
         return SITUATION_PATTERN_GROUP_X;
     }
 
+    /** Pour le pattern de la situation : index du groupe contenant la position Y. */
     protected int getSituationPatternGroupY() {
         return SITUATION_PATTERN_GROUP_Y;
     }
 
+    /** Pour le pattern de la situation : index du groupe contenant l'orientation. */
     protected int getSituationPatternGroupOrientation() {
         return SITUATION_PATTERN_GROUP_ORIENTATION;
     }
