@@ -16,6 +16,7 @@ import fr.tartopaum.mowitnow.model.Situation;
 
 public class OrderExecutorImplTest {
 
+    /** L'executor à tester. */
     private OrderExecutorImpl executor;
 
     @Before

@@ -19,10 +19,13 @@ import fr.tartopaum.mowitnow.model.Situation;
 
 public class MowItNowParserImplTest {
 
+    /** Context JMock. */
     private Mockery context = new Mockery();
 
+    /** Le parseur à tester. */
     private MowItNowParserImpl parser;
 
+    /** Dépendance : handler. */
     private MowItNowHandler handler;
 
     @Before
