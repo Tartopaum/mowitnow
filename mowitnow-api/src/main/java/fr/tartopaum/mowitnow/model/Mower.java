@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Il s'agit de la combinaison de coordonnées et d'une orientation.
  * @author Tartopaum
  */
-public final class Situation implements Serializable {
+public final class Mower implements Serializable {
 
     private static final long serialVersionUID = -5399998164501991689L;
 
@@ -20,7 +20,7 @@ public final class Situation implements Serializable {
 	 * @param coordinates Coordonnées.
 	 * @param orientation Orientation.
 	 */
-	public Situation(Coordinates coordinates, Orientation orientation) {
+	public Mower(Coordinates coordinates, Orientation orientation) {
 		super();
 
 		if (coordinates == null) {
@@ -35,7 +35,7 @@ public final class Situation implements Serializable {
 		this.orientation = orientation;
 	}
 
-	public Situation() {
+	public Mower() {
 		this(new Coordinates(), Orientation.NORTH);
 	}
 
@@ -47,12 +47,12 @@ public final class Situation implements Serializable {
         return orientation;
     }
 
-    public Situation withCoordinates(Coordinates coordinates) {
-        return new Situation(coordinates, orientation);
+    public Mower withCoordinates(Coordinates coordinates) {
+        return new Mower(coordinates, orientation);
     }
 
-    public Situation withOrientation(Orientation orientation) {
-        return new Situation(coordinates, orientation);
+    public Mower withOrientation(Orientation orientation) {
+        return new Mower(coordinates, orientation);
     }
 
     @Override
@@ -75,7 +75,7 @@ public final class Situation implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Situation other = (Situation) obj;
+        Mower other = (Mower) obj;
         if (coordinates == null) {
             if (other.coordinates != null) {
                 return false;

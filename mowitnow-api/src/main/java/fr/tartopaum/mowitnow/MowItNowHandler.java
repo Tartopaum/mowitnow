@@ -3,7 +3,7 @@ package fr.tartopaum.mowitnow;
 import fr.tartopaum.mowitnow.exception.HandlerException;
 import fr.tartopaum.mowitnow.model.Grid;
 import fr.tartopaum.mowitnow.model.Order;
-import fr.tartopaum.mowitnow.model.Situation;
+import fr.tartopaum.mowitnow.model.Mower;
 
 /**
  * Handler gérant les actions à effectuer lors du parsing d'un fichier mowitnow.
@@ -26,10 +26,10 @@ public interface MowItNowHandler {
 
     /**
      * Méthode appelée lors du parsing de la première ligne d'une tondeuse, contenant sa situation initiale.
-     * @param situation Situation initiale de la tondeuse.
+     * @param mower Situation initiale de la tondeuse.
      * @throws HandlerException
      */
-    void beginMower(Situation situation) throws HandlerException;
+    void beginMower(Mower mower) throws HandlerException;
 
     /**
      * Méthode appelée lorsque toutes les actions de la tondeuse ont été appelées.

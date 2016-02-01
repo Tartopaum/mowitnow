@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import fr.tartopaum.mowitnow.exception.ExecutionException;
 import fr.tartopaum.mowitnow.model.Coordinates;
 import fr.tartopaum.mowitnow.model.Grid;
+import fr.tartopaum.mowitnow.model.Mower;
 import fr.tartopaum.mowitnow.model.Order;
 import fr.tartopaum.mowitnow.model.Orientation;
-import fr.tartopaum.mowitnow.model.Situation;
 
 public class OrderExecutorImpl implements OrderExecutor {
 
@@ -25,30 +25,30 @@ public class OrderExecutorImpl implements OrderExecutor {
     };
 
     @Override
-    public Situation execute(Grid grid, Situation situation, Order order) throws ExecutionException {
-        Situation nextSituation;
+    public Mower execute(Grid grid, Mower mower, Order order) throws ExecutionException {
+        Mower nextSituation;
 
         switch (order) {
         case GO_FORWARD:
-            nextSituation = goForward(situation);
+            nextSituation = goForward(mower);
             break;
         case TURN_LEFT:
-            nextSituation = turnLeft(situation);
+            nextSituation = turnLeft(mower);
             break;
         case TURN_RIGHT:
-            nextSituation = turnRight(situation);
+            nextSituation = turnRight(mower);
             break;
         default:
             throw new ExecutionException("Ordre non pris en charge : " + order);
         }
 
-        Situation result = (grid.contains(nextSituation.getCoordinates()))
+        Mower result = (grid.contains(nextSituation.getCoordinates()))
                 ? nextSituation
-                : situation;
+                : mower;
 
         if (LOG.isDebugEnabled()) {
             LOG.debug("execute({}, {}, {}) => {}",
-                    grid, situation, order,
+                    grid, mower, order,
                     result);
         }
 
@@ -56,8 +56,8 @@ public class OrderExecutorImpl implements OrderExecutor {
     }
 
     @Override
-    public Situation execute(Grid grid, Situation coordinates, Iterator<Order> orders) throws ExecutionException {
-        Situation result = coordinates;
+    public Mower execute(Grid grid, Mower mower, Iterator<Order> orders) throws ExecutionException {
+        Mower result = mower;
 
         while (orders.hasNext()) {
             Order order = orders.next();
@@ -69,15 +69,15 @@ public class OrderExecutorImpl implements OrderExecutor {
 
     /**
      * Exécution de l'ordre d'avancer.
-     * @param situation Situation initiale.
+     * @param mower Situation initiale.
      * @return Situation finale.
      * @throws ExecutionException
      */
-    private Situation goForward(Situation situation) throws ExecutionException {
-        Coordinates coordinates = situation.getCoordinates();
+    private Mower goForward(Mower mower) throws ExecutionException {
+        Coordinates coordinates = mower.getCoordinates();
         Coordinates nextCoordinates;
 
-        switch (situation.getOrientation()) {
+        switch (mower.getOrientation()) {
         case NORTH:
             nextCoordinates = coordinates.moveY(1);
             break;
@@ -91,43 +91,43 @@ public class OrderExecutorImpl implements OrderExecutor {
             nextCoordinates = coordinates.moveX(-1);
             break;
         default:
-            throw new ExecutionException("Orientation non prise en charge : " + situation.getOrientation());
+            throw new ExecutionException("Orientation non prise en charge : " + mower.getOrientation());
         }
 
-        return situation.withCoordinates(nextCoordinates);
+        return mower.withCoordinates(nextCoordinates);
     }
 
     /**
      * Exécution de l'ordre de tourner à gauche.
-     * @param situation Situation initiale.
+     * @param mower Situation initiale.
      * @return Situation finale.
      * @throws ExecutionException
      */
-    private Situation turnLeft(Situation situation) throws ExecutionException {
-        return turn(situation, ORIENTATION_ARRAY_ORDERED.length - 1);
+    private Mower turnLeft(Mower mower) throws ExecutionException {
+        return turn(mower, ORIENTATION_ARRAY_ORDERED.length - 1);
     }
 
     /**
      * Exécution de l'ordre de tourner à droite.
-     * @param situation Situation initiale.
+     * @param mower Situation initiale.
      * @return Situation finale.
      * @throws ExecutionException
      */
-    private Situation turnRight(Situation situation) throws ExecutionException {
-        return turn(situation, 1);
+    private Mower turnRight(Mower mower) throws ExecutionException {
+        return turn(mower, 1);
     }
 
     /**
      * Exécution d'un ordre de rotation dans le sens des aiguilles d'une montre.
-     * @param situation Situation initiale.
+     * @param mower Situation initiale.
      * @param modifier De combien de framents tourner.
      * @return Situation finale.
      * @throws ExecutionException
      */
-    private Situation turn(Situation situation, int modifier) throws ExecutionException {
-        int currentOrientationIndex = getOrientationIndex(situation.getOrientation());
+    private Mower turn(Mower mower, int modifier) throws ExecutionException {
+        int currentOrientationIndex = getOrientationIndex(mower.getOrientation());
         int nextOrientationIndex = (currentOrientationIndex + modifier) % ORIENTATION_ARRAY_ORDERED.length;
-        return situation.withOrientation(ORIENTATION_ARRAY_ORDERED[nextOrientationIndex]);
+        return mower.withOrientation(ORIENTATION_ARRAY_ORDERED[nextOrientationIndex]);
     }
 
     /**

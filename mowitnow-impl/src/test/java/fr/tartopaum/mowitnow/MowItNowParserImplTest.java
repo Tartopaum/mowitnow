@@ -15,7 +15,7 @@ import fr.tartopaum.mowitnow.model.Coordinates;
 import fr.tartopaum.mowitnow.model.Grid;
 import fr.tartopaum.mowitnow.model.Order;
 import fr.tartopaum.mowitnow.model.Orientation;
-import fr.tartopaum.mowitnow.model.Situation;
+import fr.tartopaum.mowitnow.model.Mower;
 
 public class MowItNowParserImplTest {
 
@@ -43,11 +43,11 @@ public class MowItNowParserImplTest {
                 + "AD";
 
         final Grid grid = new Grid(6, 6);
-        final Situation situation1 = new Situation(
+        final Mower mower1 = new Mower(
                 new Coordinates(1, 2),
                 Orientation.NORTH);
 
-        final Situation situation2 = new Situation(
+        final Mower mower2 = new Mower(
                 new Coordinates(3, 3),
                 Orientation.EAST);
 
@@ -56,12 +56,12 @@ public class MowItNowParserImplTest {
             {
                 oneOf(handler).begin(grid);
 
-                oneOf(handler).beginMower(situation1);
+                oneOf(handler).beginMower(mower1);
                 oneOf(handler).order(Order.TURN_LEFT);
                 oneOf(handler).order(Order.GO_FORWARD);
                 oneOf(handler).endMower();
 
-                oneOf(handler).beginMower(situation2);
+                oneOf(handler).beginMower(mower2);
                 oneOf(handler).order(Order.GO_FORWARD);
                 oneOf(handler).order(Order.TURN_RIGHT);
                 oneOf(handler).endMower();
@@ -89,11 +89,11 @@ public class MowItNowParserImplTest {
                 + "AD\n";
 
         final Grid grid = new Grid(6, 6);
-        final Situation situation1 = new Situation(
+        final Mower mower1 = new Mower(
                 new Coordinates(1, 2),
                 Orientation.NORTH);
 
-        final Situation situation2 = new Situation(
+        final Mower mower2 = new Mower(
                 new Coordinates(3, 3),
                 Orientation.EAST);
 
@@ -102,12 +102,12 @@ public class MowItNowParserImplTest {
             {
                 oneOf(handler).begin(grid);
 
-                oneOf(handler).beginMower(situation1);
+                oneOf(handler).beginMower(mower1);
                 oneOf(handler).order(Order.TURN_LEFT);
                 oneOf(handler).order(Order.GO_FORWARD);
                 oneOf(handler).endMower();
 
-                oneOf(handler).beginMower(situation2);
+                oneOf(handler).beginMower(mower2);
                 oneOf(handler).order(Order.GO_FORWARD);
                 oneOf(handler).order(Order.TURN_RIGHT);
                 oneOf(handler).endMower();
@@ -134,11 +134,11 @@ public class MowItNowParserImplTest {
                 + "3 3 E";
 
         final Grid grid = new Grid(6, 6);
-        final Situation situation1 = new Situation(
+        final Mower mower1 = new Mower(
                 new Coordinates(1, 2),
                 Orientation.NORTH);
 
-        final Situation situation2 = new Situation(
+        final Mower mower2 = new Mower(
                 new Coordinates(3, 3),
                 Orientation.EAST);
 
@@ -147,12 +147,12 @@ public class MowItNowParserImplTest {
             {
                 oneOf(handler).begin(grid);
 
-                oneOf(handler).beginMower(situation1);
+                oneOf(handler).beginMower(mower1);
                 oneOf(handler).order(Order.TURN_LEFT);
                 oneOf(handler).order(Order.GO_FORWARD);
                 oneOf(handler).endMower();
 
-                oneOf(handler).beginMower(situation2);
+                oneOf(handler).beginMower(mower2);
                 never(handler).order(Order.TURN_RIGHT);
 
                 never(handler).end();
@@ -215,7 +215,7 @@ public class MowItNowParserImplTest {
                 + "GAC";
 
         final Grid grid = new Grid(6, 6);
-        final Situation situation1 = new Situation(
+        final Mower mower1 = new Mower(
                 new Coordinates(1, 2),
                 Orientation.NORTH);
 
@@ -224,7 +224,7 @@ public class MowItNowParserImplTest {
             {
                 oneOf(handler).begin(grid);
 
-                oneOf(handler).beginMower(situation1);
+                oneOf(handler).beginMower(mower1);
                 oneOf(handler).order(Order.TURN_LEFT);
                 oneOf(handler).order(Order.GO_FORWARD);
             }
@@ -249,7 +249,7 @@ public class MowItNowParserImplTest {
                 + "AD";
 
         final Grid grid = new Grid(6, 6);
-        final Situation situation1 = new Situation(
+        final Mower mower1 = new Mower(
                 new Coordinates(1, 2),
                 Orientation.NORTH);
 
@@ -258,7 +258,7 @@ public class MowItNowParserImplTest {
             {
                 oneOf(handler).begin(grid);
 
-                oneOf(handler).beginMower(situation1);
+                oneOf(handler).beginMower(mower1);
                 oneOf(handler).order(Order.TURN_LEFT);
                 oneOf(handler).order(Order.GO_FORWARD);
                 will(throwException(new HandlerException()));
