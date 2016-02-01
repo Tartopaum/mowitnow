@@ -2,6 +2,9 @@ package fr.tartopaum.mowitnow;
 
 import java.util.Iterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.tartopaum.mowitnow.exception.ExecutionException;
 import fr.tartopaum.mowitnow.model.Coordinates;
 import fr.tartopaum.mowitnow.model.Grid;
@@ -10,6 +13,8 @@ import fr.tartopaum.mowitnow.model.Orientation;
 import fr.tartopaum.mowitnow.model.Situation;
 
 public class OrderExecutorImpl implements OrderExecutor {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OrderExecutorImpl.class);
 
     /** Liste des orientations ordonnées dans le sens des aiguilles d'une montre. */
     private static final Orientation[] ORIENTATION_ARRAY_ORDERED = {
@@ -37,9 +42,17 @@ public class OrderExecutorImpl implements OrderExecutor {
             throw new ExecutionException("Ordre non pris en charge : " + order);
         }
 
-        return (grid.contains(nextSituation.getCoordinates()))
+        Situation result = (grid.contains(nextSituation.getCoordinates()))
                 ? nextSituation
                 : situation;
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("execute({}, {}, {}) => {}",
+                    grid, situation, order,
+                    result);
+        }
+
+        return result;
     }
 
     @Override

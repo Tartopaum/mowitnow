@@ -80,7 +80,7 @@ public class Grid {
 
     @Override
     public String toString() {
-        return "(" + width + ", " + "height" + ")";
+        return "(" + width + ", " + height + ")";
     }
 
 }
