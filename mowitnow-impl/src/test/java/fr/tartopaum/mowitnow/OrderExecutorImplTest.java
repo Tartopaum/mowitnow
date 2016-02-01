@@ -25,7 +25,7 @@ public class OrderExecutorImplTest {
     }
 
     @Test
-    public void test1() throws ExecutionException {
+    public void shouldExecuteOrdersCorrectly() throws ExecutionException {
         Grid grid = new Grid(6, 6);
         Mower coordinates = new Mower(new Coordinates(1, 2), Orientation.NORTH);
         Iterator<Order> orders = Arrays.asList(
@@ -48,7 +48,7 @@ public class OrderExecutorImplTest {
     }
 
     @Test
-    public void test2() throws ExecutionException {
+    public void shouldHandleGridExitCorrectly() throws ExecutionException {
         Grid grid = new Grid(6, 6);
         Mower coordinates = new Mower(new Coordinates(3, 3), Orientation.EAST);
         Iterator<Order> orders = Arrays.asList(

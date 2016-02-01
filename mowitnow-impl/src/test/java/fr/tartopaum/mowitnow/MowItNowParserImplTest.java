@@ -35,7 +35,7 @@ public class MowItNowParserImplTest {
     }
 
     @Test
-    public void testParseOk() throws Exception {
+    public void shouldCallHandler() throws Exception {
         String input = "5 5\n"
                 + "1 2 N\n"
                 + "GA\n"
@@ -81,7 +81,7 @@ public class MowItNowParserImplTest {
     }
 
     @Test
-    public void testParseOkEmptyLine() throws Exception {
+    public void shouldAcceptEmptyTrailingLine() throws Exception {
         String input = "5 5\n"
                 + "1 2 N\n"
                 + "GA\n"
@@ -127,7 +127,7 @@ public class MowItNowParserImplTest {
     }
 
     @Test(expected = ParseException.class)
-    public void testParseException() throws Exception {
+    public void shouldFailOnMissingOrderLine() throws Exception {
         String input = "5 5\n"
                 + "1 2 N\n"
                 + "GA\n"
@@ -170,7 +170,7 @@ public class MowItNowParserImplTest {
     }
 
     @Test(expected = ParseException.class)
-    public void testParseException2() throws Exception {
+    public void shouldFailOnBadGridDeclaration() throws Exception {
         String input = "test";
 
     // exécution
@@ -184,7 +184,7 @@ public class MowItNowParserImplTest {
     }
 
     @Test(expected = ParseException.class)
-    public void testParseException3() throws Exception {
+    public void shouldFailOnBadMowerDeclaration() throws Exception {
         String input = "5 5\n"
                 + "1 2 A\n"
                 + "GA";
@@ -209,7 +209,7 @@ public class MowItNowParserImplTest {
     }
 
     @Test(expected = ParseException.class)
-    public void testParseException4() throws Exception {
+    public void shouldFailOnBadOrderDeclaration() throws Exception {
         String input = "5 5\n"
                 + "1 2 N\n"
                 + "GAC";
@@ -241,7 +241,7 @@ public class MowItNowParserImplTest {
     }
 
     @Test(expected = HandlerException.class)
-    public void testHandlerException() throws Exception {
+    public void shouldPropageHandlerException() throws Exception {
         String input = "5 5\n"
                 + "1 2 N\n"
                 + "GA\n"
